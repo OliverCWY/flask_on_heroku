@@ -26,5 +26,10 @@ def update():
     inp=list(request.args)[0]
     return requests.get(inp).text
 
+@app.route('/')
+@cross_origin(origins="*")
+def update():
+    return deployed
+
 if __name__ == '__main__':
-   app.run(port="8088")
+   app.run()
