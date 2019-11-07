@@ -16,13 +16,13 @@ app = Flask(__name__)
 
 @app.route('/qyk')
 @cross_origin(origins="*")
-def update():
+def qyk():
     inp=list(request.args)[0]
     return get_response(inp)
 
 @app.route('/cors')
 @cross_origin(origins="*")
-def update():
+def cors():
     inp=list(request.args)[0]
     return requests.get(inp).text
 
