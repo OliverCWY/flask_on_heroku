@@ -28,8 +28,8 @@ def update():
 
 @app.route('/')
 @cross_origin(origins="*")
-def update():
-    return deployed
+def index():
+    return "deployed"
 
 if __name__ == '__main__':
    app.run()
