@@ -11,7 +11,7 @@ def get_response(msg):
 
 from flask import Flask,render_template,request,make_response
 from flask_cors import cross_origin
-import requests,os
+import requests
 app = Flask(__name__)
 
 @app.route('/qyk')
