@@ -1,18 +1,30 @@
-from flask import Flask
-from datetime import datetime
+import requests
+from urllib.parse import urlencode
+def get_response(msg):
+    key={
+        "key":"free",
+        "appid":0,
+        "msg":"你好"
+    }
+    response=requests.get("http://api.qingyunke.com/api.php?"+urlencode(key)).json()
+    return None if response["result"] else response["content"]
+
+from flask import Flask,render_template,request,make_response
+from flask_cors import cross_origin
+import requests,os
 app = Flask(__name__)
 
-@app.route('/')
-def homepage():
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
+@app.route('/qyk')
+@cross_origin(origins="*")
+def update():
+    inp=list(request.args)[0]
+    return get_response(inp)
 
-    return """
-    <h1>Hello heroku</h1>
-    <p>It is currently {time}.</p>
-
-    <img src="http://loremflickr.com/600/400" />
-    """.format(time=the_time)
+@app.route('/cors')
+@cross_origin(origins="*")
+def update():
+    inp=list(request.args)[0]
+    return requests.get(inp).text
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
-
+   app.run(port="8088")
