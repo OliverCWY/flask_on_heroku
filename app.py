@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route('/')
 @cross_origin(origins="*")
 def index():
-    return "deployed"
+    return "Success"
 
 if __name__ == '__main__':
    app.run(debug=True)
